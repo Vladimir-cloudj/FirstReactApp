@@ -1,22 +1,52 @@
+import { Component } from 'react';
+
 import './emploeers-add-form.css'
 
-const EmploeersAddForm = () => {
-    return (
-        <div className="app-add-form">
+class EmploeersAddForm extends Component{
+    constructor(props){
+        super();
+        this.state = {
+            name: '',
+            salary: 0,
+        }
+    }
+    
+    onValueChange =(event) => {
+        this.setState({
+            [event.target.name] : event.target.value,
+        })
+    }
+
+    render(){
+        const{name, salary}=this.state;
+
+        return (
+          <div className="app-add-form">
             <h3>Добавьте нового сотрудника</h3>
-            <form 
-            className="add-form d-flex">
-                <input type="text"
-                    className="form-control new-post-label"
-                    placeholder="Как его зовут?" />
-                <input type="number"
-                    className="form-control new-post-label"
-                    placeholder="ЗП в $?" />
-                <button type="submit"
-                    className="btn btn-outline-light">Добавить</button>
+            <form className="add-form d-flex">
+              <input
+                type="text"
+                className="form-control new-post-label"
+                placeholder="Как его зовут?"
+                name="name"
+                value={name || ""}
+                onChange={this.onValueChange}
+              />
+              <input
+                type="number"
+                className="form-control new-post-label"
+                placeholder="ЗП в $?"
+                name="salary"
+                value={(+salary).toFixed(2)}
+                onChange={this.onValueChange}
+              />
+              <button type="submit" className="btn btn-outline-light">
+                Добавить
+              </button>
             </form>
-        </div>
-    )
+          </div>
+        );
+    }
 }
 
 export default EmploeersAddForm;
